@@ -20,6 +20,7 @@ monospace !default;
 
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "retinajs/src/_retina.scss";
 // endbower
 
 @import 'animations';
@@ -69,40 +70,9 @@ body {
 .pt-page-ontop {
     z-index: 999;
 }
-/* Text Styles, Colors, Backgrounds */
-
-.pt-page h1 {
-    position: absolute;
-    font-weight: 300;
-    font-size: 4.4em;
-    line-height: 1;
-    letter-spacing: 6px;
-    margin: 0;
-    top: 12%;
-    width: 100%;
-    text-align: center;
-    text-transform: uppercase;
-    word-spacing: -0.3em;
-}
-
-.pt-page h1 span {
-    font-family: 'Satisfy', serif;
-    font-weight: 400;
-    font-size: 40%;
-    text-transform: none;
-    word-spacing: 0;
-    letter-spacing: 0;
-    display: block;
-    opacity: 0.4;
-}
-
-.pt-page h1 strong {
-    color: rgba(0, 0, 0, 0.1);
-}
 
 .pt-page-1 {
-    background: url(../images/bg01.jpg) no-repeat center center;
-    background-size: 100% 100%;
+    @include at2x("../images/bg01", jpg, 100%, 100%);
     text-align: center;
     overflow: hidden;
     p {
@@ -131,11 +101,33 @@ body {
 }
 
 .pt-page-2 {
-    background: #7bb7fa;
+    background: url(../images/bg01.jpg) no-repeat center center;
+    background-size: 100% 100%;
+    .rule {
+        @include at2x("../images/pic03", png, 100%, 100%);
+        width: 280px;
+        height: 305px;
+        text-align: center;
+        position: relative;
+        a {
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            right: 0;
+        }
+    }
 }
 
 .pt-page-3 {
-    background: #60d7a9;
+    @include at2x("../images/bg03", jpg, 100%, 100%);
+    .hongbao-wrap {
+        position: relative;
+        img.hongbao {
+            transform-origin: 50% 50% 50%;
+            position: absolute;
+            @include opacity(0);
+        }
+    }
 }
 
 .pt-page-4 {
@@ -157,4 +149,7 @@ body {
 .game-title {
   margin-top: 15px;
   margin-bottom: 30px;
+  @media (max-height: 480px) {
+    margin-bottom: 10px;
+  }
 }

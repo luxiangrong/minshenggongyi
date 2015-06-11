@@ -416,6 +416,8 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 
+    var hongbaoCount = 0;
+
     var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'home',
@@ -437,7 +439,66 @@ $(document).ready(function() {
     		var animation = PageTransitions.getCurrentPage() < 1 ? 9 : 10;
         	PageTransitions.nextPage({showPage: 1, animation: animation});
         },
-        qianghongbao: function() {},
+        qianghongbao: function() {
+            var animation = PageTransitions.getCurrentPage() < 2 ? 9 : 10;
+            PageTransitions.nextPage({showPage: 2, animation: animation});
+
+            var winHeight = $(window).height();
+            var winWidth = $(window).width();
+
+            _.times(15, function(i){
+                var img = $('<img src="images/pic05.jpg" alt="" class="hongbao">');
+                
+                img.on('touchstart', function(e){
+                    hongbaoCount ++;
+                    img.off('click');
+                    img.velocity('stop');
+                    img.velocity({
+                        opacity: 0,
+                        scale: '+=0.2'
+                    },{
+                        duration: 300,
+                        complete: function(){
+                            img.remove();
+                        }
+                    });
+                });
+
+                var translateX =  _.random(50, winWidth-50) + 'px',
+                    translateY = _.random(-50, 20) + 'px',
+                    rotate = _.random(-30, 30) + 'deg';
+
+                img.velocity({
+                    // rotateZ: rotateZ,
+                    left: translateX,
+                    translateY: translateY,
+                    translateZ: 0,
+                    opacity: 1,
+                    rotateZ: rotate,
+                    scale: _.random(1.2, 1.5)
+                },{
+                    duration: 0,
+                    delay: _.random(700, 900) * i
+                });
+                img.velocity({
+                    // rotateZ: _.random(-60, 60) + 'deg',
+                    left: translateX,
+                    rotateZ: rotate,
+                    translateY: winHeight - 100 + 'px',
+                    translateZ: 0
+                },{
+                    duration: 4000,
+                    easing: "linear",
+                    complete: function(){
+                        img.remove();
+                    }
+                });
+
+                $('.pt-page-3 .hongbao-wrap').append(img);
+
+
+            }) ;
+        },
         hongbaojieguo: function() {},
         maishumiao: function() {},
         zhongshu: function() {},
