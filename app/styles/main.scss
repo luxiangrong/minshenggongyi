@@ -287,11 +287,13 @@ body {
         bottom: 10px;
         text-align: center;
         left: 0px;
-        font-size: 2em;
+        font-size: 1.5em;
         color: #ffffff; 
         width: 100%;
         p {
             display: none;
+            margin-bottom: 10px;
+            line-height: 1.2;
         }
     }
     .tree-wrap {
