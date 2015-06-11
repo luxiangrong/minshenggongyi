@@ -1295,3 +1295,15 @@
 	-webkit-animation-delay: 1s;
 	animation-delay: 1s;
 }
+
+@keyframes tool-focus {
+	0% {
+		transform: scale(1) rotateZ(-10deg);
+	}
+	50% {
+		transform: scale(1.2) rotateZ(10deg);
+	}
+	100% {
+		transform: scale(1) rotateZ(-10deg);
+	}
+}

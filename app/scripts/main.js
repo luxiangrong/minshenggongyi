@@ -440,6 +440,7 @@ $(document).ready(function() {
         	PageTransitions.nextPage({showPage: 1, animation: animation});
         },
         qianghongbao: function() {
+            var router = this;
             var animation = PageTransitions.getCurrentPage() < 2 ? 9 : 10;
             PageTransitions.nextPage({showPage: 2, animation: animation});
 
@@ -495,13 +496,220 @@ $(document).ready(function() {
                 });
 
                 $('.pt-page-3 .hongbao-wrap').append(img);
-
-
             }) ;
+
+            var time = 11;
+            var countHandler;
+            function countDown() {
+                $('.pt-page-3 .count-down strong').text(--time)
+                if(time == 0) {
+                    router.navigate("#hongbaojieguo", {trigger: true});
+                    window.clearTimeout(countHandler);
+                    return;
+                }
+                countHandler = setTimeout(countDown, 1000);
+            }
+            countDown();
         },
-        hongbaojieguo: function() {},
-        maishumiao: function() {},
-        zhongshu: function() {},
+        hongbaojieguo: function() {
+            var animation = PageTransitions.getCurrentPage() < 3 ? 9 : 10;
+            PageTransitions.nextPage({showPage: 3, animation: animation});
+
+            $('#jiangjin').text(hongbaoCount);
+            $('#jinbi').text(hongbaoCount * 100);
+        },
+        maishumiao: function() {
+            var animation = PageTransitions.getCurrentPage() < 4 ? 9 : 10;
+            PageTransitions.nextPage({showPage: 4, animation: animation});
+            var router = this;
+
+            $('.buy-shumiao').on('click', function(e){
+                e.preventDefault();
+
+                var treeName = $(this).find('.tree-name').text();
+                var treeAmount = $(this).find('.tree-amount').text();
+
+                $('.buy-success').find('.tree-name').text(treeName);
+                $('.buy-success').find('.tree-amount').text(hongbaoCount * 100 / 50);
+
+                $('body').append('<div class="mask"></div>');
+                $('.buy-success').velocity({
+                    scale: [1, 0]
+                }, {
+                    duration: 500
+                });
+
+                $('.zhongshu').on('click', function(e){
+                    e.preventDefault();
+                    $('.buy-success').remove();
+                    $('.mask').remove();
+                    router.navigate("#zhongshu", {trigger: true});
+                });
+            });
+        },
+        zhongshu: function() {
+            console.log('zhongshu');
+            var animation = PageTransitions.getCurrentPage() < 5 ? 9 : 10;
+            PageTransitions.nextPage({showPage: 5, animation: animation});
+
+            $('.tool-jiaoshui').on('click', function(){
+                if(!$(this).hasClass('current')) {
+                    return;
+                }
+
+                $('.tip').velocity('transition.fadeOut');
+                $(this).removeClass('current');
+
+                $('.jiaoshui').velocity('transition.fadeIn', {
+                    duration: 1000
+                });
+                $('.jiaoshui').velocity({
+                    rotateZ: '-45deg'
+                }, {
+                    complete: function(){
+                        $('.water-wrap').velocity({
+                            height: 78
+                        }, {
+                            loop: 1,
+                            complete: function() {
+                                $('.tree.tree-1').velocity({
+                                    opacity: 0,
+                                    scaleY: 1.3
+                                }, {
+                                    duration: 2000
+                                });
+                                $('.jiaoshui').velocity('transition.fadeOut', {
+                                    duration: 1000
+                                });
+                                $('.tree.tree-2').velocity({
+                                    opacity: 1
+                                }, {
+                                    duration: 2000,
+                                    complete: function() {
+                                        $('.tip').html('请为小树<strong>施肥</strong>').css('top', '46%').velocity('transition.fadeIn', {
+                                            duration: 1000
+                                        });
+                                        $('.tool-shifei').addClass('current');
+                                    }
+                                });
+                            }
+                        });
+                    }
+                })
+            });
+            $('.tool-shifei').on('click', function(){
+                if(!$(this).hasClass('current')) {
+                    return;
+                }
+
+                $('.tip').velocity('transition.fadeOut');
+                $(this).removeClass('current');
+
+                $('.shifei').velocity('transition.fadeIn', {
+                    duration: 1000
+                });
+                $('.shifei').velocity({
+                    rotateZ: '-115deg'
+                }, {
+                    complete: function(){
+                        $('.feiliao-wrap').velocity({
+                            height: 78
+                        }, {
+                            loop: 1,
+                            complete: function() {
+                                $('.tree.tree-2').velocity({
+                                    opacity: 0,
+                                    scaleY: 1.3
+                                }, {
+                                    duration: 2000
+                                });
+                                $('.shifei').velocity('transition.fadeOut', {
+                                    duration: 1000
+                                });
+                                $('.tree.tree-3').velocity({
+                                    opacity: 1
+                                }, {
+                                    duration: 2000,
+                                    complete: function() {
+                                        $('.tip').html('请为小树<strong>松土</strong>').css('top', '34%').velocity('transition.fadeIn', {
+                                            duration: 1000
+                                        });
+                                        $('.tool-songtu').addClass('current');
+                                    }
+                                });
+                            }
+                        });
+                    }
+                })
+            });
+            $('.tool-songtu').on('click', function(){
+                if(!$(this).hasClass('current')) {
+                    return;
+                }
+
+                $('.tip').velocity('transition.fadeOut');
+                $(this).removeClass('current');
+
+                $('.songtu').velocity('transition.fadeIn', {
+                    duration: 1000
+                });
+                $('.songtu').velocity({
+                    translateX: -20,
+                    translateY: 20,
+                    rotateZ: '10deg'
+                }, {
+                    loop: 1,
+                    complete: function(){
+                        $('.tree.tree-3').velocity({
+                            opacity: 0,
+                            scaleY: 1.3
+                        }, {
+                            duration: 2000
+                        });
+                        $('.songtu').velocity('transition.fadeOut', {
+                            duration: 1000
+                        });
+                        $('.tree.tree-4.tree-4-0').velocity({
+                            opacity: 1
+                        }, {
+                            duration: 2000,
+                            complete: function() {
+                                $('.tools').velocity({
+                                    translateY: 200,
+                                }, {
+                                    duration: 2000
+                                });
+                                $('.tree-4-1, .tree-4-2').velocity('fadeIn', {
+                                    stagger: 1000,
+                                    duration: 2000,
+                                    mobileHA: false
+                                });
+                                $('.tree-5').velocity('transition.fadeIn', {
+                                    stagger: 1000,
+                                    delay: 1400,
+                                    duration: 2000
+                                });
+                                $('.tree-6').velocity('transition.fadeIn', {
+                                    stagger: 1000,
+                                    delay: 600,
+                                    duration: 2800
+                                });
+                                $('.tree-7').velocity('transition.fadeIn', {
+                                    stagger: 1000,
+                                    delay: 2200,
+                                    duration: 2000
+                                });
+
+                                $('.xiwang p').velocity('transition.slideUpIn', {
+                                    stagger: 500,
+                                    duration: 2000
+                                });
+                            }
+                        });
+                    }
+                })
+            });
+        },
         xunzhang: function() {},
         guanzhu: function() {},
         renderError: function() {}
