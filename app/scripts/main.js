@@ -476,7 +476,7 @@ $(document).ready(function() {
                     translateZ: 0,
                     opacity: 1,
                     rotateZ: rotate,
-                    scale: _.random(1.2, 1.5)
+                    scale: _.random(1.1, 1.3)
                 },{
                     duration: 0,
                     delay: _.random(700, 900) * i
@@ -548,9 +548,9 @@ $(document).ready(function() {
             });
         },
         zhongshu: function() {
-            console.log('zhongshu');
             var animation = PageTransitions.getCurrentPage() < 5 ? 9 : 10;
             PageTransitions.nextPage({showPage: 5, animation: animation});
+            var router = this;
 
             $('.tool-jiaoshui').on('click', function(){
                 if(!$(this).hasClass('current')) {
@@ -570,7 +570,7 @@ $(document).ready(function() {
                         $('.water-wrap').velocity({
                             height: 78
                         }, {
-                            loop: 1,
+                            loop: 3,
                             complete: function() {
                                 $('.tree.tree-1').velocity({
                                     opacity: 0,
@@ -615,7 +615,7 @@ $(document).ready(function() {
                         $('.feiliao-wrap').velocity({
                             height: 78
                         }, {
-                            loop: 1,
+                            loop: 3,
                             complete: function() {
                                 $('.tree.tree-2').velocity({
                                     opacity: 0,
@@ -658,7 +658,7 @@ $(document).ready(function() {
                     translateY: 20,
                     rotateZ: '10deg'
                 }, {
-                    loop: 1,
+                    loop: 2,
                     complete: function(){
                         $('.tree.tree-3').velocity({
                             opacity: 0,
@@ -674,10 +674,9 @@ $(document).ready(function() {
                         }, {
                             duration: 2000,
                             complete: function() {
-                                $('.tools').velocity({
-                                    translateY: 200,
-                                }, {
-                                    duration: 2000
+                                $('.tools').velocity('fadeOut', {
+                                    duration: 2000,
+                                    mobileHA: false
                                 });
                                 $('.tree-4-1, .tree-4-2').velocity('fadeIn', {
                                     stagger: 1000,
@@ -702,16 +701,30 @@ $(document).ready(function() {
 
                                 $('.xiwang p').velocity('transition.slideUpIn', {
                                     stagger: 500,
-                                    duration: 2000
+                                    duration: 2000,
+                                    complete: function(){
+                                        window.setTimeout(function(){
+                                            router.navigate("#xunzhang", {trigger: true});
+                                        }, 5000);
+                                    }
                                 });
+
+                                
                             }
                         });
                     }
                 })
             });
         },
-        xunzhang: function() {},
-        guanzhu: function() {},
+        xunzhang: function() {
+            var animation = PageTransitions.getCurrentPage() < 6 ? 9 : 10;
+            PageTransitions.nextPage({showPage: 6, animation: animation});
+
+        },
+        guanzhu: function() {
+            var animation = PageTransitions.getCurrentPage() < 7 ? 9 : 10;
+            PageTransitions.nextPage({showPage: 7, animation: animation});
+        },
         renderError: function() {}
     });
 
