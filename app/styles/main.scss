@@ -101,15 +101,21 @@ body {
 .pt-page-2 {
     @include at2x("../images/bg05", jpg, 100%, 100%);
     background-repeat: no-repeat;
+    @media (max-width: 320px) {
+        .game-title {
+            margin-bottom: 5px;
+        }
+    }
     .rule {
         @include at2x("../images/pic03", png, 100%, 100%);
         width: 280px;
         height: 305px;
+        
         text-align: center;
         position: relative;
         a {
             position: absolute;
-            bottom: -30px;
+            bottom: -20px;
             left: 0;
             right: 0;
         }
@@ -206,6 +212,11 @@ body {
         @media (max-width: 320px) {
             transform-origin: 50% 0%;
             transform: scale(0.8);
+        }
+    }
+    .game-title {
+        @media (max-width: 320px) {
+            margin-bottom: 20px;
         }
     }
     .shumiao {
@@ -545,10 +556,19 @@ body {
     @include at2x("../images/bg04", jpg, 100%, 100%);
     background-repeat: no-repeat;
     background-position: center center;
+    @media (max-width: 320px) {
+        .game-title {
+            margin-bottom: 10px;
+        }
+    }
     .xunzhang {
         img {
             margin-bottom: 10px;
             @media (max-height: 480px) {
+                max-width: 150px;
+                margin-bottom: 5px;
+            }
+            @media (max-width: 320px) {
                 max-width: 150px;
                 margin-bottom: 5px;
             }
@@ -595,7 +615,7 @@ body {
 .game-title {
     margin-top: 15px;
     margin-bottom: 30px;
-    @media (max-height: 480px) {
+    @media (max-width: 320px) {
         margin-bottom: 10px;
     }
 }
@@ -636,4 +656,40 @@ body {
     -webkit-user-select: none;
     opacity: 0.3;
     background: rgb(255, 255, 255);
+}
+
+#audio_btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 200;
+  display: none;
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+}
+
+.play_yinfu {
+  background-image: url(../images/music.gif);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 60px 60px;
+}
+
+.rotate {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 30px;
+  height: 30px;
+  background-size: 100% 100%;
+  background-image: url(../images/music_off.png);
+  animation: rotating 1.2s linear infinite;
+}
+
+.off {
+  background-image: url(../images/music_off.png);
+  background-size: 30px 30px;
+  background-repeat: no-repeat;
+  background-position: center center;
 }

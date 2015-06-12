@@ -416,6 +416,21 @@ $(document).ready(function() {
 		e.preventDefault();
 	});
 
+    $('#audio_btn').on('click', function(){
+        var audio = $(this).find('#media')[0];
+        if(audio.paused) {
+            $(this).addClass('play_yinfu');
+            $(this).find('#yinfu').addClass('rotate');
+            $(this).toggleClass('off');
+            audio.play();
+        } else {
+            $(this).removeClass('play_yinfu');
+            $(this).find('#yinfu').removeClass('rotate');
+            $(this).toggleClass('off');
+            audio.pause();
+        }
+    });
+
     var hongbaoCount = 0;
 
     var AppRouter = Backbone.Router.extend({
@@ -444,10 +459,12 @@ $(document).ready(function() {
             var animation = PageTransitions.getCurrentPage() < 2 ? 9 : 10;
             PageTransitions.nextPage({showPage: 2, animation: animation});
 
+            hongbaoCount = 0;
+
             var winHeight = $(window).height();
             var winWidth = $(window).width();
 
-            _.times(15, function(i){
+            _.times(40, function(i){
                 var img = $('<img src="images/pic05.jpg" alt="" class="hongbao">');
                 
                 img.on('touchstart', function(e){
@@ -476,10 +493,10 @@ $(document).ready(function() {
                     translateZ: 0,
                     opacity: 1,
                     rotateZ: rotate,
-                    scale: _.random(1.1, 1.3)
+                    scale: _.random(1.1, 1.2)
                 },{
                     duration: 0,
-                    delay: _.random(700, 900) * i
+                    delay: 250 * i
                 });
                 img.velocity({
                     // rotateZ: _.random(-60, 60) + 'deg',
@@ -488,7 +505,7 @@ $(document).ready(function() {
                     translateY: winHeight - 100 + 'px',
                     translateZ: 0
                 },{
-                    duration: 4000,
+                    duration: 2000,
                     easing: "linear",
                     complete: function(){
                         img.remove();
@@ -503,6 +520,7 @@ $(document).ready(function() {
             function countDown() {
                 $('.pt-page-3 .count-down strong').text(--time)
                 if(time == 0) {
+
                     router.navigate("#hongbaojieguo", {trigger: true});
                     window.clearTimeout(countHandler);
                     return;
@@ -514,9 +532,18 @@ $(document).ready(function() {
         hongbaojieguo: function() {
             var animation = PageTransitions.getCurrentPage() < 3 ? 9 : 10;
             PageTransitions.nextPage({showPage: 3, animation: animation});
+            var router = this;
+
 
             $('#jiangjin').text(hongbaoCount);
             $('#jinbi').text(hongbaoCount * 100);
+
+            if(hongbaoCount == 0) {
+                window.setTimeout(function(){
+                    router.navigate("#qianghongbao", {trigger: true, replace: true});
+                }, 1000);
+                
+            }
         },
         maishumiao: function() {
             var animation = PageTransitions.getCurrentPage() < 4 ? 9 : 10;
@@ -719,7 +746,7 @@ $(document).ready(function() {
         xunzhang: function() {
             var animation = PageTransitions.getCurrentPage() < 6 ? 9 : 10;
             PageTransitions.nextPage({showPage: 6, animation: animation});
-
+            $('#tree-amount-2').text(hongbaoCount * 2);
         },
         guanzhu: function() {
             var animation = PageTransitions.getCurrentPage() < 7 ? 9 : 10;
