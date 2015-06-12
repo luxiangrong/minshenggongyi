@@ -464,7 +464,7 @@ $(document).ready(function() {
             var winHeight = $(window).height();
             var winWidth = $(window).width();
 
-            _.times(40, function(i){
+            _.times(30, function(i){
                 var img = $('<img src="images/pic05.jpg" alt="" class="hongbao">');
                 
                 img.on('touchstart', function(e){
@@ -475,14 +475,14 @@ $(document).ready(function() {
                         opacity: 0,
                         scale: '+=0.2'
                     },{
-                        duration: 300,
+                        duration: 200,
                         complete: function(){
                             img.remove();
                         }
                     });
                 });
 
-                var translateX =  _.random(50, winWidth-50) + 'px',
+                var translateX =  _.random(100, winWidth-100) + 'px',
                     translateY = _.random(-50, 20) + 'px',
                     rotate = _.random(-30, 30) + 'deg';
 
@@ -496,7 +496,7 @@ $(document).ready(function() {
                     scale: _.random(1.1, 1.2)
                 },{
                     duration: 0,
-                    delay: 250 * i
+                    delay: 300 * i
                 });
                 img.velocity({
                     // rotateZ: _.random(-60, 60) + 'deg',
@@ -539,10 +539,27 @@ $(document).ready(function() {
             $('#jinbi').text(hongbaoCount * 100);
 
             if(hongbaoCount == 0) {
-                window.setTimeout(function(){
-                    router.navigate("#qianghongbao", {trigger: true, replace: true});
-                }, 1000);
-                
+                $('body').append('<div class="mask"></div>');
+                $('.alert').velocity('stop');
+                $('.alert').velocity({
+                    scale: [1, 0]
+                }, {
+                    duration: 500
+                });
+
+                $('.alert').on('click', function(){
+                    $('.alert').velocity('stop');
+                    $('.alert').velocity({
+                        scale: [0, 1]
+                    }, {
+                        duration: 500,
+                        complete: function() {
+                            router.navigate("#qianghongbao", {trigger: true, replace: true});
+                            $('.mask').remove();
+                        }
+                    });
+                    
+                });
             }
         },
         maishumiao: function() {
@@ -579,7 +596,7 @@ $(document).ready(function() {
             PageTransitions.nextPage({showPage: 5, animation: animation});
             var router = this;
 
-            $('.tool-jiaoshui').on('click', function(){
+            $('.tool-jiaoshui').on('touchstart', function(){
                 if(!$(this).hasClass('current')) {
                     return;
                 }
@@ -624,7 +641,7 @@ $(document).ready(function() {
                     }
                 })
             });
-            $('.tool-shifei').on('click', function(){
+            $('.tool-shifei').on('touchstart', function(){
                 if(!$(this).hasClass('current')) {
                     return;
                 }
@@ -669,7 +686,7 @@ $(document).ready(function() {
                     }
                 })
             });
-            $('.tool-songtu').on('click', function(){
+            $('.tool-songtu').on('touchstart', function(){
                 if(!$(this).hasClass('current')) {
                     return;
                 }
@@ -726,17 +743,17 @@ $(document).ready(function() {
                                     duration: 2000
                                 });
 
-                                $('.xiwang p').velocity('transition.slideUpIn', {
-                                    stagger: 500,
-                                    duration: 2000,
-                                    complete: function(){
-                                        window.setTimeout(function(){
-                                            router.navigate("#xunzhang", {trigger: true});
-                                        }, 5000);
-                                    }
-                                });
-
-                                
+                                window.setTimeout(function(){
+                                    $('.xiwang p').velocity('transition.slideUpIn', {
+                                        stagger: 500,
+                                        duration: 2000,
+                                        complete: function(){
+                                            window.setTimeout(function(){
+                                                router.navigate("#xunzhang", {trigger: true});
+                                            }, 5000);
+                                        }
+                                    });
+                                }, 2000);
                             }
                         });
                     }
@@ -747,6 +764,12 @@ $(document).ready(function() {
             var animation = PageTransitions.getCurrentPage() < 6 ? 9 : 10;
             PageTransitions.nextPage({showPage: 6, animation: animation});
             $('#tree-amount-2').text(hongbaoCount * 2);
+
+            $('#btn-share').on('click', function(e){
+                e.preventDefault();
+                $('body').append('<div class="mask mask-a"></div>');
+                $('.share-tip').show();
+            });
         },
         guanzhu: function() {
             var animation = PageTransitions.getCurrentPage() < 7 ? 9 : 10;

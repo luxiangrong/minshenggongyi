@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>民生公益</title>
+    <title>民生财富公益行</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -47,6 +47,7 @@
                     <img class="img-responsive center-block" src="images/pic01.png" alt="">
                 </div>
                 <div class="rule center-block">
+                    <img src="images/pic03.png" alt="">
                     <a href="#qianghongbao"><img src="images/pic04.png" alt=""></a>
                 </div>
             </div>
@@ -80,7 +81,7 @@
                     </div>
                 </div>
                 <p>
-                    为了更好地保护我们的蓝天白云，绿化人类赖以生存的家园，让我们一道，为环保事业贡献自己的力量。
+                    民生财富代表玩家将游戏红包对应金额捐赠至中青公益——“公益林”项目。多种一棵树，多享一片天。
                 </p>
                 <a class="center-block" href="#maishumiao"><img src="images/pic08.png" alt=""></a>
             </div>
@@ -285,7 +286,7 @@
             </div>
             <div class="share">
                 <p>分享至朋友圈，为环保事业出一份力。</p>
-                <a href="" class="btn btn-a btn-sm">分享到朋友圈</a>
+                <a id="btn-share" href="" class="btn btn-a btn-sm btn-share">分享到朋友圈</a>
             </div>
         </div>
         <div class="pt-page pt-page-8">
@@ -320,6 +321,15 @@
         </div>
         <a class="zhongshu" href="#zhongshu"><img src="images/pic12.png" alt=""></a>
     </div>
+
+    <div class="dialog alert">
+        <img src="images/pic31.png" alt="" class="img-responsive center-block" >
+    </div>
+
+    <div class="dialog share-tip">
+        <img src="images/pic32.png" alt="" data-no-retina class="pull-right">
+        <p>点击屏幕右上方<strong>“分享到朋友圈”</strong>邀请更多的朋友来参与我们的环保植树活动</p>
+    </div>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -328,7 +338,6 @@
     <script src="bower_components/backbone/backbone.js"></script>
     <script src="bower_components/velocity/velocity.js"></script>
     <script src="bower_components/velocity/velocity.ui.js"></script>
-    <script src="bower_components/retinajs/src/retina.js"></script>
     <script src="bower_components/fastclick/lib/fastclick.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
@@ -337,13 +346,17 @@
     <script src="scripts/main.js"></script>
     <!-- endbuild -->
     <script>
-    var title = "民生公益";
-    var desc = "民生公益 植树达人";
+    var title = "民生财富公益行——植树达人大联盟";
+    var desc = "恶劣的环境正在影响你的生活，侵蚀美好的环境，快来参与民生公益植树达人大联盟活动吧！";
     var baseUrl = "http://tfr256720.soso.bj.cn/msgy/";
     var link = baseUrl + 'index.html';
-    var imgUrl = baseUrl + 'images/logo01@2x.png';
+    var imgUrl = baseUrl + 'images/logo02@2x.png';
 
-    $.getJSON('sign.php', function(sign) {
+    var currentUrl =  window.location.href;
+    currentUrl = currentUrl.replace(/#.*/, '');
+
+
+    $.getJSON('sign.php', {url: currentUrl}, function(sign) {
         /*
          * 注意：
          * 1. 所有的JS接口只能在公众号绑定的域名下调用，公众号开发者需要先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。
@@ -368,6 +381,12 @@
                 'onMenuShareWeibo'
             ]
         });
+
+        function closeShareTip() {
+            $('.mask').remove();
+            $('.share-tip').hide();
+        }
+
         wx.ready(function() {
             wx.onMenuShareTimeline({
                 title: title, // 分享标题
@@ -375,6 +394,7 @@
                 imgUrl: imgUrl, // 分享图标
                 success: function() {
                     // 用户确认分享后执行的回调函数
+                    closeShareTip();
                 },
                 cancel: function() {
                     // 用户取消分享后执行的回调函数
@@ -388,6 +408,7 @@
                 type: '', // 分享类型,music、video或link，不填默认为link
                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                 success: function() {
+                    closeShareTip();
                     // 用户确认分享后执行的回调函数
                 },
                 cancel: function() {
@@ -401,6 +422,7 @@
                 imgUrl: imgUrl, // 分享图标
                 type: '', // 分享类型,music、video或link，不填默认为link
                 success: function() {
+                    closeShareTip();
                     // 用户确认分享后执行的回调函数
                 },
                 cancel: function() {
@@ -414,6 +436,7 @@
                 imgUrl: imgUrl, // 分享图标
                 type: '', // 分享类型,music、video或link，不填默认为link
                 success: function() {
+                    closeShareTip();
                     // 用户确认分享后执行的回调函数
                 },
                 cancel: function() {

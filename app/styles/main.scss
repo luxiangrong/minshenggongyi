@@ -17,10 +17,22 @@ Monaco,
 Consolas,
 "Courier New",
 monospace !default;
+
+@mixin at2x($path, $ext: "jpg", $w: auto, $h: auto) {
+  $at1x_path: "#{$path}.#{$ext}";
+  $at2x_path: "#{$path}@2x.#{$ext}";
+
+  background-image: url("#{$at1x_path}");
+
+  background-size: $w $h;
+
+}
+
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
-@import "retinajs/src/_retina.scss";
 // endbower
+
+
 @import 'animations';
 html,
 body {
@@ -107,7 +119,6 @@ body {
         }
     }
     .rule {
-        @include at2x("../images/pic03", png, 100%, 100%);
         width: 280px;
         height: 305px;
         
@@ -130,6 +141,8 @@ body {
         img.hongbao {
             transform-origin: 50% 50% 50%;
             position: absolute;
+            width: 59px;
+            height: 35px;
             @include opacity(0);
         }
     }
@@ -152,7 +165,6 @@ body {
 .pt-page-4 {
     @include at2x("../images/bg04", jpg, 100%, 100%);
     background-repeat: no-repeat;
-    background: #fdc162;
     .hongbao-result {
         @include at2x("../images/pic06", png, 100%, 100%);
         width: 228px;
@@ -645,6 +657,41 @@ body {
     transform: scale(0);
 }
 
+.alert {
+    position: fixed;
+    border-radius: 20px;
+    text-align: center;
+    color: #83B327;
+    z-index: 200;
+    width: 260px;
+    left: 50%;
+    margin-left: -130px;
+    top: 10%;
+    padding-bottom: 10px;
+    transform: scale(0);
+}
+
+.share-tip {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    z-index: 202;
+    display: none;
+    img {
+        margin-right: 20px;
+        margin-top: 20px;
+    }
+    p {
+        clear: both;
+        width: 50%;
+        margin: 30px auto;
+        font-size: 1.2857em;
+        strong {
+            color: #CF151B;
+        }
+    }
+}
+
 .mask {
     z-index: 199;
     position: fixed;
@@ -656,6 +703,10 @@ body {
     -webkit-user-select: none;
     opacity: 0.3;
     background: rgb(255, 255, 255);
+    &.mask-a {
+        opacity: 0.8;
+        z-index: 201;
+    }
 }
 
 #audio_btn {
