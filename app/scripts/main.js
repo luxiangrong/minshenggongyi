@@ -461,73 +461,12 @@ $(document).ready(function() {
 
             hongbaoCount = 0;
 
-            var winHeight = $(window).height();
-            var winWidth = $(window).width();
+            $('.closed-hongbao').on('touchstart', function(){
+                hongbaoCount = _.random(1, 20);
+                router.navigate('#hongbaojieguo', {trigger: true});
+            });
 
-            _.times(30, function(i){
-                var img = $('<img src="images/pic05.jpg" alt="" class="hongbao">');
-                
-                img.on('touchstart', function(e){
-                    hongbaoCount ++;
-                    img.off('click');
-                    img.velocity('stop');
-                    img.velocity({
-                        opacity: 0,
-                        scale: '+=0.2'
-                    },{
-                        duration: 200,
-                        complete: function(){
-                            img.remove();
-                        }
-                    });
-                });
-
-                var translateX =  _.random(100, winWidth-100) + 'px',
-                    translateY = _.random(-50, 20) + 'px',
-                    rotate = _.random(-30, 30) + 'deg';
-
-                img.velocity({
-                    // rotateZ: rotateZ,
-                    left: translateX,
-                    translateY: translateY,
-                    translateZ: 0,
-                    opacity: 1,
-                    rotateZ: rotate,
-                    scale: _.random(1.1, 1.2)
-                },{
-                    duration: 0,
-                    delay: 300 * i
-                });
-                img.velocity({
-                    // rotateZ: _.random(-60, 60) + 'deg',
-                    left: translateX,
-                    rotateZ: rotate,
-                    translateY: winHeight - 100 + 'px',
-                    translateZ: 0
-                },{
-                    duration: 2000,
-                    easing: "linear",
-                    complete: function(){
-                        img.remove();
-                    }
-                });
-
-                $('.pt-page-3 .hongbao-wrap').append(img);
-            }) ;
-
-            var time = 11;
-            var countHandler;
-            function countDown() {
-                $('.pt-page-3 .count-down strong').text(--time)
-                if(time == 0) {
-
-                    router.navigate("#hongbaojieguo", {trigger: true});
-                    window.clearTimeout(countHandler);
-                    return;
-                }
-                countHandler = setTimeout(countDown, 1000);
-            }
-            countDown();
+            
         },
         hongbaojieguo: function() {
             var animation = PageTransitions.getCurrentPage() < 3 ? 9 : 10;
@@ -596,169 +535,156 @@ $(document).ready(function() {
             PageTransitions.nextPage({showPage: 5, animation: animation});
             var router = this;
 
-            $('.tool-jiaoshui').on('touchstart', function(){
-                if(!$(this).hasClass('current')) {
-                    return;
-                }
 
-                $('.tip').velocity('transition.fadeOut');
-                $(this).removeClass('current');
+            $('.tip').velocity('transition.fadeOut');
+            
 
-                $('.jiaoshui').velocity('transition.fadeIn', {
-                    duration: 1000
-                });
-                $('.jiaoshui').velocity({
-                    rotateZ: '-45deg'
-                }, {
-                    complete: function(){
-                        $('.water-wrap').velocity({
-                            height: 78
-                        }, {
-                            loop: 3,
-                            complete: function() {
-                                $('.tree.tree-1').velocity({
-                                    opacity: 0,
-                                    scaleY: 1.3
-                                }, {
-                                    duration: 2000
-                                });
-                                $('.jiaoshui').velocity('transition.fadeOut', {
-                                    duration: 1000
-                                });
-                                $('.tree.tree-2').velocity({
-                                    opacity: 1
-                                }, {
-                                    duration: 2000,
-                                    complete: function() {
-                                        $('.tip').html('请为小树<strong>施肥</strong>').css('top', '46%').velocity('transition.fadeIn', {
-                                            duration: 1000
-                                        });
-                                        $('.tool-shifei').addClass('current');
-                                    }
-                                });
-                            }
-                        });
-                    }
-                })
+            $('.jiaoshui').velocity('transition.fadeIn', {
+                duration: 1000
             });
-            $('.tool-shifei').on('touchstart', function(){
-                if(!$(this).hasClass('current')) {
-                    return;
-                }
-
-                $('.tip').velocity('transition.fadeOut');
-                $(this).removeClass('current');
-
-                $('.shifei').velocity('transition.fadeIn', {
-                    duration: 1000
-                });
-                $('.shifei').velocity({
-                    rotateZ: '-115deg'
-                }, {
-                    complete: function(){
-                        $('.feiliao-wrap').velocity({
-                            height: 78
-                        }, {
-                            loop: 3,
-                            complete: function() {
-                                $('.tree.tree-2').velocity({
-                                    opacity: 0,
-                                    scaleY: 1.3
-                                }, {
-                                    duration: 2000
-                                });
-                                $('.shifei').velocity('transition.fadeOut', {
-                                    duration: 1000
-                                });
-                                $('.tree.tree-3').velocity({
-                                    opacity: 1
-                                }, {
-                                    duration: 2000,
-                                    complete: function() {
-                                        $('.tip').html('请为小树<strong>松土</strong>').css('top', '34%').velocity('transition.fadeIn', {
-                                            duration: 1000
-                                        });
-                                        $('.tool-songtu').addClass('current');
-                                    }
-                                });
-                            }
-                        });
-                    }
-                })
-            });
-            $('.tool-songtu').on('touchstart', function(){
-                if(!$(this).hasClass('current')) {
-                    return;
-                }
-
-                $('.tip').velocity('transition.fadeOut');
-                $(this).removeClass('current');
-
-                $('.songtu').velocity('transition.fadeIn', {
-                    duration: 1000
-                });
-                $('.songtu').velocity({
-                    translateX: -20,
-                    translateY: 20,
-                    rotateZ: '10deg'
-                }, {
-                    loop: 2,
-                    complete: function(){
-                        $('.tree.tree-3').velocity({
-                            opacity: 0,
-                            scaleY: 1.3
-                        }, {
-                            duration: 2000
-                        });
-                        $('.songtu').velocity('transition.fadeOut', {
-                            duration: 1000
-                        });
-                        $('.tree.tree-4.tree-4-0').velocity({
-                            opacity: 1
-                        }, {
-                            duration: 2000,
-                            complete: function() {
-                                $('.tools').velocity('fadeOut', {
-                                    duration: 2000,
-                                    mobileHA: false
-                                });
-                                $('.tree-4-1, .tree-4-2').velocity('fadeIn', {
-                                    stagger: 1000,
-                                    duration: 2000,
-                                    mobileHA: false
-                                });
-                                $('.tree-5').velocity('transition.fadeIn', {
-                                    stagger: 1000,
-                                    delay: 1400,
-                                    duration: 2000
-                                });
-                                $('.tree-6').velocity('transition.fadeIn', {
-                                    stagger: 1000,
-                                    delay: 600,
-                                    duration: 2800
-                                });
-                                $('.tree-7').velocity('transition.fadeIn', {
-                                    stagger: 1000,
-                                    delay: 2200,
-                                    duration: 2000
-                                });
-
-                                window.setTimeout(function(){
-                                    $('.xiwang p').velocity('transition.slideUpIn', {
-                                        stagger: 500,
-                                        duration: 2000,
-                                        complete: function(){
-                                            window.setTimeout(function(){
-                                                router.navigate("#xunzhang", {trigger: true});
-                                            }, 5000);
-                                        }
+            $('.jiaoshui').velocity({
+                rotateZ: '-45deg'
+            }, {
+                complete: function(){
+                    $('.water-wrap').velocity({
+                        height: 78
+                    }, {
+                        loop: 1,
+                        complete: function() {
+                            $('.tree.tree-1').velocity({
+                                opacity: 0,
+                                scaleY: 1.3
+                            }, {
+                                duration: 2000
+                            });
+                            $('.jiaoshui').velocity('transition.fadeOut', {
+                                duration: 1000
+                            });
+                            $('.tree.tree-2').velocity({
+                                opacity: 1
+                            }, {
+                                duration: 2000,
+                                complete: function() {
+                                    $('.tip').html('请为小树<strong>施肥</strong>').css('top', '46%').velocity('transition.fadeIn', {
+                                        duration: 1000
                                     });
-                                }, 2000);
-                            }
-                        });
-                    }
-                })
+                                    $('.tool-jiaoshui').removeClass('current');
+                                    $('.tool-shifei').addClass('current');
+                                    $('.tip').velocity('transition.fadeOut');
+                                    $(this).removeClass('current');
+
+                                    $('.shifei').velocity('transition.fadeIn', {
+                                        duration: 1000
+                                    });
+                                    $('.shifei').velocity({
+                                        rotateZ: '-115deg'
+                                    }, {
+                                        complete: function(){
+                                            $('.feiliao-wrap').velocity({
+                                                height: 78
+                                            }, {
+                                                loop: 1,
+                                                complete: function() {
+                                                    $('.tree.tree-2').velocity({
+                                                        opacity: 0,
+                                                        scaleY: 1.3
+                                                    }, {
+                                                        duration: 2000
+                                                    });
+                                                    $('.shifei').velocity('transition.fadeOut', {
+                                                        duration: 1000
+                                                    });
+                                                    $('.tree.tree-3').velocity({
+                                                        opacity: 1
+                                                    }, {
+                                                        duration: 2000,
+                                                        complete: function() {
+                                                            $('.tip').html('请为小树<strong>松土</strong>').css('top', '34%').velocity('transition.fadeIn', {
+                                                                duration: 1000
+                                                            });
+                                                            $('.tool-shifei').removeClass('current');
+                                                            $('.tool-songtu').addClass('current');
+                                                            $('.tip').velocity('transition.fadeOut');
+                                                            $(this).removeClass('current');
+
+                                                            $('.songtu').velocity('transition.fadeIn', {
+                                                                duration: 1000
+                                                            });
+                                                            $('.songtu').velocity({
+                                                                translateX: -20,
+                                                                translateY: 20,
+                                                                rotateZ: '10deg'
+                                                            }, {
+                                                                loop: 1,
+                                                                complete: function(){
+                                                                    $('.tree.tree-3').velocity({
+                                                                        opacity: 0,
+                                                                        scaleY: 1.3
+                                                                    }, {
+                                                                        duration: 2000
+                                                                    });
+                                                                    $('.songtu').velocity('transition.fadeOut', {
+                                                                        duration: 1000
+                                                                    });
+                                                                    $('.tree.tree-4.tree-4-0').velocity({
+                                                                        opacity: 1
+                                                                    }, {
+                                                                        duration: 2000,
+                                                                        complete: function() {
+                                                                            $('.tool-songtu').removeClass('current');
+                                                                            $('.tools').velocity('fadeOut', {
+                                                                                duration: 500,
+                                                                                mobileHA: false
+                                                                            });
+                                                                            $('.tree-4-1, .tree-4-2, .tree-4-3, .tree-4-4').velocity('fadeIn', {
+                                                                                stagger: 500,
+                                                                                duration: 1000,
+                                                                                mobileHA: false
+                                                                            });
+                                                                            $('.tree-5').velocity('transition.fadeIn', {
+                                                                                stagger: 500,
+                                                                                delay: 700,
+                                                                                duration: 1000
+                                                                            });
+                                                                            $('.tree-6').velocity('transition.fadeIn', {
+                                                                                stagger: 500,
+                                                                                delay: 300,
+                                                                                duration: 2800
+                                                                            });
+                                                                            $('.tree-7').velocity('transition.fadeIn', {
+                                                                                stagger: 500,
+                                                                                delay: 1200,
+                                                                                duration: 1000
+                                                                            });
+
+                                                                            window.setTimeout(function(){
+                                                                                $('.xiwang p').velocity('transition.slideUpIn', {
+                                                                                    stagger: 500,
+                                                                                    duration: 2000,
+                                                                                    complete: function(){
+                                                                                        window.setTimeout(function(){
+                                                                                            router.navigate("#xunzhang", {trigger: true});
+                                                                                        }, 2000);
+                                                                                    }
+                                                                                });
+                                                                            }, 2000);
+                                                                        }
+                                                                    });
+                                                                }
+                                                            })
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    })
+                                }
+                            });
+                        }
+                    });
+                }
             });
+        
         },
         xunzhang: function() {
             var animation = PageTransitions.getCurrentPage() < 6 ? 9 : 10;

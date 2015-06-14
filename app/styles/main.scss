@@ -147,18 +147,12 @@ body {
         }
     }
     .count-down {
-        position: absolute;
-        width: 50%;
         text-align: center;
-        left: 50%;
-        bottom: 20px;
-        margin-left: -25%;
-        border: 1px solid #5E7130;
-        line-height: 30px;
-        color: #5E7130;
-        strong {
-            font-size: 1.2em;
-        }
+        line-height: 1.5em;
+        color: #A51F24;
+        font-size: 2em;
+        font-weight: bold;
+        margin-top: 1em;
     }
 }
 
@@ -320,6 +314,11 @@ body {
         }
     }
     .tree-wrap {
+        position: absolute;
+        width: 100%;
+        height: 72%;
+        left: 0;
+        top: 0;
         .tree {
             position: absolute;
             left: 50%;
@@ -327,181 +326,226 @@ body {
             opacity: 0;
             &.tree-1 {
                 margin-left: -45px;
-                top: 62%;
+                bottom: 0%;
                 opacity: 1;
                 @media (max-height: 480px) {
-                    top: 70%;
+                    bottom: -25%; 
                 }
             }
             &.tree-2 {
                 margin-left: -55px;
-                top: 58%;
+                bottom: 0%;
                 @media (max-height: 480px) {
-                    top: 65%;
+                    bottom: -25%; 
                 }
             }
             &.tree-3 {
                 margin-left: -55px;
-                top: 46%;
+                bottom: 0%;
                 @media (max-height: 480px) {
-                    top: 51%;
+                    bottom: -25%; 
                 }
             }
             &.tree-4 {
                 z-index: 8;
                 margin-left: -93px;
-                top: 35%;
+                bottom: 0%;
                 @media (max-height: 480px) {
-                    top: 38%;
+                    bottom: -25%; 
                 }
                 &.tree-4-1 {
                     left: -4%;
                     margin-left: 0;
-                    top: 34%;
+                    bottom: 2%;
                     transform-origin: 50% 100%;
                     transform: scale(0.8);
                     @media (max-height: 480px) {
                         left: -10%;
                         margin-left: 0;
-                        top: 33%;
+                        bottom: -21%; 
                     }
                 }
                 &.tree-4-2 {
                     left: 55%;
                     margin-left: 0;
-                    top: 34%;
+                    bottom: 2%;
                     transform-origin: 50% 100%;
                     transform: scale(0.8);
                     @media (max-height: 480px) {
                         left: 53%;
                         margin-left: 0;
-                        top: 32%;
+                        bottom: -23%; 
+                    }
+                }
+                &.tree-4-3 {
+                    left: 43%;
+                    margin-left: 0;
+                    bottom: 1%;
+                    transform-origin: 50% 100%;
+                    transform: scale(0.8);
+                    @media (max-height: 480px) {
+                        left: 57%;
+                        margin-left: 0;
+                        bottom: -24%; 
+                    }
+                }
+                &.tree-4-4 {
+                    left: 10%;
+                    margin-left: 0;
+                    bottom: 1%;
+                    transform-origin: 50% 100%;
+                    transform: scale(0.8);
+                    @media (max-height: 480px) {
+                        left: 27%;
+                        margin-left: 0;
+                        bottom: -24%; 
                     }
                 }
             }
             &.tree-5 {
+                bottom: -1%;
                 &.tree-5-1 {
                     left: 0%;
                     margin-left: 0;
-                    top: 70%;
                     @media (max-height: 480px) {
                         left: -4%;
                         margin-left: 0;
-                        top: 75%;
+                        bottom: -27%; 
                     }
                 }
                 &.tree-5-2 {
                     left: 27%;
                     margin-left: 0;
-                    top: 70%;
+                    bottom: 1%;
                     @media (max-height: 480px) {
                         left: 27%;
                         margin-left: 0;
-                        top: 79%;
+                        bottom: -23%; 
                     }
                 }
                 &.tree-5-3 {
                     left: 52%;
                     margin-left: 0;
-                    top: 68%;
+                    bottom: -2%;
                     @media (max-height: 480px) {
                         left: 52%;
                         margin-left: 0;
-                        top: 80%;
+                        bottom: -27%; 
                     }
                 }
                 &.tree-5-4 {
                     left: 74%;
                     margin-left: 0;
-                    top: 72%;
+                    bottom: 2%;
                     @media (max-height: 480px) {
                         left: 74%;
                         margin-left: 0;
-                        top: 78%;
+                        bottom: -23%; 
                     }
                 }
             }
             &.tree-6 {
+                bottom: 0;
                 &.tree-6-1 {
                     left: 0%;
                     margin-left: 0;
-                    top: 48%;
+                    bottom: 5%;
                     @media (max-height: 480px) {
                         left: -4%;
                         margin-left: 0;
-                        top: 54%;
+                        bottom: -20%; 
                     }
                 }
                 &.tree-6-2 {
                     left: 17%;
                     margin-left: 0;
-                    top: 55%;
+                    bottom: 5%;
                     @media (max-height: 480px) {
                         left: 26%;
                         margin-left: 0;
-                        top: 61%;
+                        bottom: -20%; 
                     }
                 }
                 &.tree-6-3 {
                     left: 54%;
                     margin-left: 0;
-                    top: 52%;
+                    bottom: 4%;
                     @media (max-height: 480px) {
                         left: 57%;
                         margin-left: 0;
-                        top: 61%;
+                        bottom: -21%; 
                     }
                 }
                 &.tree-6-4 {
                     left: 78%;
                     margin-left: 0;
-                    top: 51%;
+                    bottom: 2%;
                     @media (max-height: 480px) {
                         left: 88%;
                         margin-left: 0;
-                        top: 50%;
+                        bottom: -22%; 
+                    }
+                }
+                &.tree-6-5 {
+                    left: 68%;
+                    margin-left: 0;
+                    bottom: 4%;
+                    @media (max-height: 480px) {
+                        left: 88%;
+                        margin-left: 0;
+                        bottom: -21%; 
+                    }
+                }
+                &.tree-6-6 {
+                    left: 33%;
+                    margin-left: 0;
+                    bottom: 3%;
+                    @media (max-height: 480px) {
+                        left: 88%;
+                        margin-left: 0;
+                        bottom: -21%; 
                     }
                 }
             }
             &.tree-7 {
                 &.tree-7-1 {
-                    left: 3%;
+                    left: 7%;
                     margin-left: 0;
-                    top: 46%;
+                    bottom: 7%;
                     @media (max-height: 480px) {
                         left: 0%;
                         margin-left: 0;
-                        top: 50%;
+                        bottom: -15%; 
                     }
                 }
                 &.tree-7-2 {
                     left: 22%;
                     margin-left: 0;
-                    top: 53%;
+                    bottom: 5%;
                     @media (max-height: 480px) {
                         left: 28%;
                         margin-left: 0;
-                        top: 59%;
+                        bottom: -20%; 
                     }
                 }
                 &.tree-7-3 {
                     left: 64%;
                     margin-left: 0;
-                    top: 53%;
+                    bottom: 5%;
                     @media (max-height: 480px) {
                         left: 57%;
                         margin-left: 0;
-                        top: 61%;
+                        bottom: -20%; 
                     }
                 }
                 &.tree-7-4 {
-                    left: 82%;
+                    left: 84%;
                     margin-left: 0;
-                    top: 49%;
+                    bottom: 4%;
                     @media (max-height: 480px) {
                         left: 89%;
                         margin-left: 0;
-                        top: 48%;
+                        bottom: -21%; 
                     }
                 }
             }
@@ -528,37 +572,49 @@ body {
         .jiaoshui {
             position: absolute;
             left: 60%;
-            top: 47%;
+            bottom: 20%;
             opacity: 0;
+            @media (max-height: 480px) {
+                bottom: 10%;
+            }
         }
         .water-wrap {
             position: absolute;
             left: 50%;
-            top: 55%;
+            top: 78%;
             height: 0px;
             overflow: hidden;
+            @media (max-height: 480px) {
+                top: 88%;
+            }
         }
         .shifei {
             position: absolute;
             left: 60%;
-            top: 47%;
+            bottom: 20%;
             opacity: 0;
             transform: rotateZ(-70deg);
+            @media (max-height: 480px) {
+                bottom: 10%;
+            }
         }
         .feiliao-wrap {
             position: absolute;
             left: 50%;
-            top: 55%;
+            top: 78%;
             height: 0px;
             overflow: hidden;
+            @media (max-height: 480px) {
+                top: 88%;
+            }
         }
         .songtu {
             position: absolute;
             left: 60%;
-            top: 64%;
+            bottom: 0%;
             opacity: 0;
             @media (max-height: 480px) {
-                top: 72%;
+                bottom: -20%;
             }
         }
     }
