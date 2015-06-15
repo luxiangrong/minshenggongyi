@@ -630,6 +630,19 @@ body {
         }
     }
     .xunzhang {
+        @include at2x("../images/pic28", png, 100%, 100%);
+        width: 230px;
+        height: 213px;
+        background-position: 50% top;
+        color: #F8B62D;
+        text-align: center;
+        padding-top: 35px;
+        margin-bottom: 10px;
+        span {
+            font-size: 1.8em;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
         img {
             margin-bottom: 10px;
             @media (max-height: 480px) {
@@ -653,6 +666,10 @@ body {
         width: 100%;
         left: 0;
         text-align: center;
+        @media (max-height: 480px) {
+            transform-origin: 50% 100%;
+            transform: scale(0.8);
+        }
         p {
             margin-bottom: 5px;
         }
